@@ -15,6 +15,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.mn_today);
-        addFragment();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
@@ -63,14 +64,30 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
         }
+
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) this);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(latitude == 0.0 && longitude == 0.0)
+                    handler.postDelayed(this, 500);
+                else{
+                    addFragment();
+                    handler.removeCallbacks(this);
+                }
+
+
+            }
+        }, 500);
     }
 
 
     private void addFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frame_layout, new TodayWeatherFragment());
+        fragmentTransaction.add(R.id.frame_layout, new TodayWeatherFragment(latitude, longitude));
         fragmentTransaction.commit();
     }
 
@@ -84,8 +101,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-//        Log.d("tag", "lat: " + latitude + "lon: " + longitude);
-        if(location.getLatitude() != 0 && location.getLongitude() !=0){
+        if(location.getLatitude() != 0.0 && location.getLongitude() != 0.0){
         latitude = location.getLatitude();
         longitude = location.getLongitude();}
         else{
@@ -93,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
             latitude = 21.027763;
             longitude = 105.834160;
         }
+//        Log.d("tag", "lat: " + latitude + ", lon: " + longitude);
         locationManager.removeUpdates(this);
     }
 }
