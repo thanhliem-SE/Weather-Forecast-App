@@ -1,14 +1,20 @@
 package liemnguyen.app.weather.view.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,8 +24,12 @@ import liemnguyen.app.weather.view.fragments.MoreWeatherFragment;
 import liemnguyen.app.weather.view.fragments.SettingFragment;
 import liemnguyen.app.weather.view.fragments.TodayWeatherFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener{
     private BottomNavigationView mBottomNavigationView;
+
+    protected LocationManager locationManager;
+    protected LocationListener locationListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) this);
     }
 
 
@@ -64,5 +79,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+        //Log.d("tag", "lat: " + latitude + "lon: " + longitude);
     }
 }
