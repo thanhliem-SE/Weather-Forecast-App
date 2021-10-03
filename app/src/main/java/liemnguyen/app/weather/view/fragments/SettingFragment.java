@@ -15,6 +15,9 @@ public class SettingFragment extends Fragment {
 
     }
 
+    public SettingFragment(double latitude, double longitude) {
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -15,6 +15,9 @@ public class MoreWeatherFragment extends Fragment {
 
     }
 
+    public MoreWeatherFragment(double latitude, double longitude) {
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -8,13 +8,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,33 +25,34 @@ import liemnguyen.app.weather.view.fragments.SettingFragment;
 import liemnguyen.app.weather.view.fragments.TodayWeatherFragment;
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
-    private BottomNavigationView mBottomNavigationView;
 
     protected LocationManager locationManager;
-    protected LocationListener locationListener;
 
+    private double latitude;
+    private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mBottomNavigationView = findViewById(R.id.bottom_nav);
-        mBottomNavigationView.setSelectedItemId(R.id.mn_today);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.mn_today);
         addFragment();
 
-        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.mn_today:
-                        replaceFragment(new TodayWeatherFragment());
+                        replaceFragment(new TodayWeatherFragment(latitude, longitude));
                         return true;
                     case R.id.mn_more_day:
-                        replaceFragment(new MoreWeatherFragment());
+                        replaceFragment(new MoreWeatherFragment(latitude, longitude));
                         return true;
                     case R.id.mn_setting:
-                        replaceFragment(new SettingFragment());
+                        replaceFragment(new SettingFragment(latitude, longitude));
                         return true;
                 }
                 return false;
@@ -83,8 +84,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
-        //Log.d("tag", "lat: " + latitude + "lon: " + longitude);
+//        Log.d("tag", "lat: " + latitude + "lon: " + longitude);
+        if(location.getLatitude() != 0 && location.getLongitude() !=0){
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();}
+        else{
+            // set Ha Noi is default Location
+            latitude = 21.027763;
+            longitude = 105.834160;
+        }
+        locationManager.removeUpdates(this);
     }
 }
