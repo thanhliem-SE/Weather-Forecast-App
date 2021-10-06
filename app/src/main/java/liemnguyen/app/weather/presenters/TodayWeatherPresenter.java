@@ -1,5 +1,6 @@
 package liemnguyen.app.weather.presenters;
 
 public interface TodayWeatherPresenter {
-    public void loadData(double lat, double lon);
+    public void loadDataByLocation(double lat, double lon);
+    public void loadDataByCity(String city);
 }

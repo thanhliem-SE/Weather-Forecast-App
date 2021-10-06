@@ -16,13 +16,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import liemnguyen.app.weather.R;
-import liemnguyen.app.weather.view.fragments.MoreWeatherFragment;
+import liemnguyen.app.weather.view.fragments.DailyWeatherFragment;
 import liemnguyen.app.weather.view.fragments.SettingFragment;
 import liemnguyen.app.weather.view.fragments.TodayWeatherFragment;
 
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                         replaceFragment(new TodayWeatherFragment(latitude, longitude));
                         return true;
                     case R.id.mn_more_day:
-                        replaceFragment(new MoreWeatherFragment(latitude, longitude));
+                        replaceFragment(new DailyWeatherFragment(latitude, longitude));
                         return true;
                     case R.id.mn_setting:
                         replaceFragment(new SettingFragment(latitude, longitude));
