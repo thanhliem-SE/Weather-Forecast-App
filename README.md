@@ -12,9 +12,7 @@ Request and display the weather information by daily or hourly.
 The weather information is provided by the <a href='https://openweathermap.org/'>World Weather Data API</a>
 
 ## Results
-![image](https://user-images.githubusercontent.com/62129407/136234816-d4f06e86-855d-48d1-8334-94aeab37c300.png)
-![image](https://user-images.githubusercontent.com/62129407/136234905-348578af-f7f4-422a-92df-92981dfd8097.png)
-![image](https://user-images.githubusercontent.com/62129407/136235684-c5342165-e37d-457f-81ca-eb403cf01959.png)
+![image](https://user-images.githubusercontent.com/62129407/136234816-d4f06e86-855d-48d1-8334-94aeab37c300.png)![image](https://user-images.githubusercontent.com/62129407/136234905-348578af-f7f4-422a-92df-92981dfd8097.png)![image](https://user-images.githubusercontent.com/62129407/136235684-c5342165-e37d-457f-81ca-eb403cf01959.png)
 
 ## Acquired knowledge
 The development process involved learning the following topics:
