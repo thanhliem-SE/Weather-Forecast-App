@@ -37,7 +37,7 @@ public class DailyWeatherPresenterImpl implements DailyWeatherPresenter {
             @Override
             public void onResponse(Call<WeatherListDetail> call, Response<WeatherListDetail> response) {
                 dailyWeatherView.getDataDailyWeather((ArrayList<Daily>) response.body().getDaily());
-                dailyWeatherView.getDataHourlyWeather(new ArrayList<Hourly>(response.body().getHourly().subList(0,4)));
+                dailyWeatherView.getDataHourlyWeather(new ArrayList<Hourly>(response.body().getHourly().subList(0,12)));
                 Log.d("tag", "Success");
             }
 
