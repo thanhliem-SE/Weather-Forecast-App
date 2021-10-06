@@ -18,6 +18,7 @@ import liemnguyen.app.weather.listeners.TodayWeatherView;
 import liemnguyen.app.weather.models.WeatherDetail;
 import liemnguyen.app.weather.presenters.TodayWeatherPresenter;
 import liemnguyen.app.weather.presenters.TodayWeatherPresenterImpl;
+import liemnguyen.app.weather.view.activities.MainActivity;
 
 public class TodayWeatherFragment extends Fragment implements TodayWeatherView {
     private View view;
@@ -103,6 +104,13 @@ public class TodayWeatherFragment extends Fragment implements TodayWeatherView {
     @Override
     public void getWeatherDetailByCity(WeatherDetail weatherDetail) {
         setGUI(weatherDetail);
+        setLocation(latitude, longitude);
+    }
+
+    private void setLocation(double latitude, double longitude) {
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null)
+            mainActivity.setLocation(latitude, longitude);
     }
 
     @Override
@@ -111,13 +119,13 @@ public class TodayWeatherFragment extends Fragment implements TodayWeatherView {
     }
 
     private String upperFirstLetter(String s) {
-        Log.d("tag", s);
+ //       Log.d("tag", s);
         String[] strings = s.split(" ");
         String rs = "";
-        for (int i = 0; i < strings.length; i++){
+        for (int i = 0; i < strings.length; i++) {
             String str = strings[i];
             String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
-            rs += cap + "\n";
+            rs += cap + " ";
         }
         return rs;
     }

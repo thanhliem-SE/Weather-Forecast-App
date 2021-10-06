@@ -16,5 +16,5 @@ public interface DataService {
     Call<WeatherDetail> getTodayWeatherByCity(@Query("q") String city, @Query("appid") String appid, @Query("units") String units, @Query("lang")String lang);
 
     @GET("onecall")
-    Call<WeatherListDetail> getDailyWeatherDetail(@Query("lat") double lat, @Query("lon") double lon, @Query("appid") String appid, @Query("units") String units, @Query("lang")String lang, @Query("exclude") String exclude);
+    Call<WeatherListDetail> getDailyWeatherDetail(@Query("lat") double lat, @Query("lon") double lon, @Query("appid") String appid, @Query("units") String units, @Query("lang")String lang);
 }

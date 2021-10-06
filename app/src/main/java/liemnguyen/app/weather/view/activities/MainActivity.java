@@ -22,15 +22,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import liemnguyen.app.weather.R;
 import liemnguyen.app.weather.view.fragments.DailyWeatherFragment;
-import liemnguyen.app.weather.view.fragments.SettingFragment;
+import liemnguyen.app.weather.view.fragments.InfoFragment;
 import liemnguyen.app.weather.view.fragments.TodayWeatherFragment;
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
 
     protected LocationManager locationManager;
 
-    private double latitude;
-    private double longitude;
+    protected double latitude;
+    protected double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                         replaceFragment(new DailyWeatherFragment(latitude, longitude));
                         return true;
                     case R.id.mn_setting:
-                        replaceFragment(new SettingFragment(latitude, longitude));
+                        replaceFragment(new InfoFragment(latitude, longitude));
                         return true;
                 }
                 return false;
@@ -110,5 +110,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         }
 //        Log.d("tag", "lat: " + latitude + ", lon: " + longitude);
         locationManager.removeUpdates(this);
+    }
+
+    public void setLocation(double latitude, double longitude){
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }

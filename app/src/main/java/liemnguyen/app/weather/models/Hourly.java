@@ -5,32 +5,17 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Daily {
+public class Hourly {
 
     @SerializedName("dt")
     @Expose
     private int dt;
-    @SerializedName("sunrise")
-    @Expose
-    private float sunrise;
-    @SerializedName("sunset")
-    @Expose
-    private float sunset;
-    @SerializedName("moonrise")
-    @Expose
-    private float moonrise;
-    @SerializedName("moonset")
-    @Expose
-    private float moonset;
-    @SerializedName("moon_phase")
-    @Expose
-    private float moonPhase;
     @SerializedName("temp")
     @Expose
-    private Temp temp;
+    private float temp;
     @SerializedName("feels_like")
     @Expose
-    private FeelsLike feelsLike;
+    private float feelsLike;
     @SerializedName("pressure")
     @Expose
     private float pressure;
@@ -40,6 +25,15 @@ public class Daily {
     @SerializedName("dew_point")
     @Expose
     private float dewPoint;
+    @SerializedName("uvi")
+    @Expose
+    private float uvi;
+    @SerializedName("clouds")
+    @Expose
+    private float clouds;
+    @SerializedName("visibility")
+    @Expose
+    private float visibility;
     @SerializedName("wind_speed")
     @Expose
     private float windSpeed;
@@ -52,33 +46,23 @@ public class Daily {
     @SerializedName("weather")
     @Expose
     private List<Weather> weather = null;
-    @SerializedName("clouds")
-    @Expose
-    private float clouds;
     @SerializedName("pop")
     @Expose
     private float pop;
-    @SerializedName("rain")
-    @Expose
-    private float rain;
-    @SerializedName("uvi")
-    @Expose
-    private float uvi;
 
     /**
      * No args constructor for use in serialization
+     *
      */
-    public Daily() {
+    public Hourly() {
     }
 
     /**
-     * @param moonset
-     * @param rain
-     * @param sunrise
+     *
      * @param temp
+     * @param visibility
      * @param windGust
      * @param uvi
-     * @param moonrise
      * @param pressure
      * @param clouds
      * @param dewPoint
@@ -86,33 +70,26 @@ public class Daily {
      * @param feelsLike
      * @param windDeg
      * @param pop
-     * @param sunset
      * @param weather
      * @param humidity
-     * @param moonPhase
      * @param windSpeed
      */
-    public Daily(int dt, float sunrise, float sunset, float moonrise, float moonset, float moonPhase, Temp temp, FeelsLike feelsLike, float pressure, float humidity, float dewPoint, float windSpeed, float windDeg, float windGust, List<Weather> weather, float clouds, float pop, float rain, float uvi) {
+    public Hourly(int dt, float temp, float feelsLike, float pressure, float humidity, float dewPoint, float uvi, float clouds, float visibility, float windSpeed, float windDeg, float windGust, List<Weather> weather, float pop) {
         super();
         this.dt = dt;
-        this.sunrise = sunrise;
-        this.sunset = sunset;
-        this.moonrise = moonrise;
-        this.moonset = moonset;
-        this.moonPhase = moonPhase;
         this.temp = temp;
         this.feelsLike = feelsLike;
         this.pressure = pressure;
         this.humidity = humidity;
         this.dewPoint = dewPoint;
+        this.uvi = uvi;
+        this.clouds = clouds;
+        this.visibility = visibility;
         this.windSpeed = windSpeed;
         this.windDeg = windDeg;
         this.windGust = windGust;
         this.weather = weather;
-        this.clouds = clouds;
         this.pop = pop;
-        this.rain = rain;
-        this.uvi = uvi;
     }
 
     public int getDt() {
@@ -123,59 +100,19 @@ public class Daily {
         this.dt = dt;
     }
 
-    public float getSunrise() {
-        return sunrise;
-    }
-
-    public void setSunrise(float sunrise) {
-        this.sunrise = sunrise;
-    }
-
-    public float getSunset() {
-        return sunset;
-    }
-
-    public void setSunset(float sunset) {
-        this.sunset = sunset;
-    }
-
-    public float getMoonrise() {
-        return moonrise;
-    }
-
-    public void setMoonrise(float moonrise) {
-        this.moonrise = moonrise;
-    }
-
-    public float getMoonset() {
-        return moonset;
-    }
-
-    public void setMoonset(float moonset) {
-        this.moonset = moonset;
-    }
-
-    public float getMoonPhase() {
-        return moonPhase;
-    }
-
-    public void setMoonPhase(float moonPhase) {
-        this.moonPhase = moonPhase;
-    }
-
-    public Temp getTemp() {
+    public float getTemp() {
         return temp;
     }
 
-    public void setTemp(Temp temp) {
+    public void setTemp(float temp) {
         this.temp = temp;
     }
 
-    public FeelsLike getFeelsLike() {
+    public float getFeelsLike() {
         return feelsLike;
     }
 
-    public void setFeelsLike(FeelsLike feelsLike) {
+    public void setFeelsLike(float feelsLike) {
         this.feelsLike = feelsLike;
     }
 
@@ -201,6 +138,30 @@ public class Daily {
 
     public void setDewPoint(float dewPoint) {
         this.dewPoint = dewPoint;
+    }
+
+    public float getUvi() {
+        return uvi;
+    }
+
+    public void setUvi(float uvi) {
+        this.uvi = uvi;
+    }
+
+    public float getClouds() {
+        return clouds;
+    }
+
+    public void setClouds(float clouds) {
+        this.clouds = clouds;
+    }
+
+    public float getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(float visibility) {
+        this.visibility = visibility;
     }
 
     public float getWindSpeed() {
@@ -235,36 +196,12 @@ public class Daily {
         this.weather = weather;
     }
 
-    public float getClouds() {
-        return clouds;
-    }
-
-    public void setClouds(float clouds) {
-        this.clouds = clouds;
-    }
-
     public float getPop() {
         return pop;
     }
 
     public void setPop(float pop) {
         this.pop = pop;
-    }
-
-    public float getRain() {
-        return rain;
-    }
-
-    public void setRain(float rain) {
-        this.rain = rain;
-    }
-
-    public float getUvi() {
-        return uvi;
-    }
-
-    public void setUvi(float uvi) {
-        this.uvi = uvi;
     }
 
 }

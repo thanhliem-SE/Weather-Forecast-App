@@ -3,34 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@drawable/bg_textview"
-    android:backgroundTint="@android:color/transparent"
+    android:background="@drawable/bg_textview_search"
     android:padding="5dp"
+    android:backgroundTint="#1565C0"
     android:orientation="horizontal">
     <TextView
+        android:id="@+id/itemDaily_txtDateNow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Firday \n May, 29"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
+        android:layout_gravity="center"
         android:gravity="center"/>
 
     <TextView
+        android:id="@+id/itemDaily_temp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="32"
+        android:text="22"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="20sp"
         android:layout_gravity="center"
         android:gravity="center"/>
 
     <FrameLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1">
         <ImageView
+            android:id="@+id/itemDaily_img"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_gravity="center"/>

@@ -22,6 +22,9 @@ public class WeatherListDetail {
     @SerializedName("daily")
     @Expose
     private List<Daily> daily = null;
+    @SerializedName("hourly")
+    @Expose
+    private List<Hourly> hourly = null;
 
     /**
      * No args constructor for use in serialization
@@ -38,13 +41,14 @@ public class WeatherListDetail {
      * @param lon
      * @param lat
      */
-    public WeatherListDetail(float lat, float lon, String timezone, int timezoneOffset, List<Daily> daily) {
+    public WeatherListDetail(float lat, float lon, String timezone, int timezoneOffset, List<Daily> daily, List<Hourly> hourly) {
         super();
         this.lat = lat;
         this.lon = lon;
         this.timezone = timezone;
         this.timezoneOffset = timezoneOffset;
         this.daily = daily;
+        this.hourly = hourly;
     }
 
     public float getLat() {
@@ -87,4 +91,11 @@ public class WeatherListDetail {
         this.daily = daily;
     }
 
+    public List<Hourly> getHourly() {
+        return hourly;
+    }
+
+    public void setHourly(List<Hourly> hourly) {
+        this.hourly = hourly;
+    }
 }

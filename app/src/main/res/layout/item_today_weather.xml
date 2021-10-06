@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:padding="5dp"
     android:layout_margin="5dp"
-    android:background="#0277BD"
+    android:background="@drawable/bg_textview_search"
+    android:backgroundTint="#0277BD"
     android:orientation="horizontal">
     <ImageView
         android:id="@+id/toDayWeather_imgView"
