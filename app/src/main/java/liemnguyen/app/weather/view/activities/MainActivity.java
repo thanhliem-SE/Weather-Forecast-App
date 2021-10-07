@@ -70,13 +70,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(latitude == 0.0 && longitude == 0.0)
+                if(latitude == 0.0 || longitude == 0.0)
                     handler.postDelayed(this, 500);
                 else{
                     addFragment();
                     handler.removeCallbacks(this);
                 }
-
 
             }
         }, 500);
@@ -87,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.frame_layout, new TodayWeatherFragment(latitude, longitude));
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.commit();
     }
 

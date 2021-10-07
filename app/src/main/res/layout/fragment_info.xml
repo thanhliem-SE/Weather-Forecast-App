@@ -39,4 +39,12 @@
         android:textSize="20sp"
         android:layout_margin="10dp"
         android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Src: https://github.com/thanhliem-SE/Weather-Forecast-App"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:textStyle="bold"/>
 </LinearLayout>

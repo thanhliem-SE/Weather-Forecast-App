@@ -21,10 +21,8 @@ import liemnguyen.app.weather.presenters.TodayWeatherPresenterImpl;
 import liemnguyen.app.weather.view.activities.MainActivity;
 
 public class TodayWeatherFragment extends Fragment implements TodayWeatherView {
-    private View view;
     private TextView txtName, txtDescription, txtTemp, txtHumidity, txtCloudy, txtWindy;
     private EditText edtCity;
-    private ImageButton btnSearch;
 
     private double latitude;
     private double longitude;
@@ -43,7 +41,7 @@ public class TodayWeatherFragment extends Fragment implements TodayWeatherView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_today_weather, container, false);
+        View view = inflater.inflate(R.layout.fragment_today_weather, container, false);
 
         txtName = view.findViewById(R.id.main_txtName);
         txtDescription = view.findViewById(R.id.main_txtDescription);
@@ -52,7 +50,7 @@ public class TodayWeatherFragment extends Fragment implements TodayWeatherView {
         txtCloudy = view.findViewById(R.id.main_txtCloudy);
         txtWindy = view.findViewById(R.id.main_txtWindy);
         edtCity = view.findViewById(R.id.main_edtCity);
-        btnSearch = view.findViewById(R.id.main_btnSearch);
+        ImageButton btnSearch = view.findViewById(R.id.main_btnSearch);
 
         todayWeatherPresenter = new TodayWeatherPresenterImpl(TodayWeatherFragment.this);
 
@@ -71,15 +69,15 @@ public class TodayWeatherFragment extends Fragment implements TodayWeatherView {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (latitude == 0.0 && longitude == 0.0)
-                    handler.postDelayed(this, 200);
+                if (latitude == 0.0 || longitude == 0.0)
+                    handler.postDelayed(this, 500);
                 else {
 //                    Log.d("tag", "lat: " + latitude + ", lon: " + longitude);
                     todayWeatherPresenter.loadDataByLocation(latitude, longitude);
                     handler.removeCallbacks(this);
                 }
             }
-        }, 200);
+        }, 500);
 
         return view;
 
